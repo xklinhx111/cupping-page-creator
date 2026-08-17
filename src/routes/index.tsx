@@ -1,40 +1,135 @@
 import { ChatWidget } from "@/components/chat-widget";
-import {
-  LanguageProvider,
-  useLanguage,
-} from "@/components/language-provider";
-import { Button } from "@/components/ui/button";
+import { LanguageProvider } from "@/components/language-provider";
 import heroImage from "@/assets/hero-cupping.jpg";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { LeafIcon, MessageCircleIcon, WindIcon } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  name: "Ventouses & Gua Sha — Ivry-sur-Seine",
+  description:
+    "Séances de ventouses sèches, Gua Sha et pistolet de massage. Prestation de bien-être et de détente, à Ivry-sur-Seine.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Ivry-sur-Seine",
+    postalCode: "94200",
+    addressCountry: "FR",
+  },
+  priceRange: "60–90 €",
+  currenciesAccepted: "EUR",
+  areaServed: [
+    "Ivry-sur-Seine",
+    "Vitry-sur-Seine",
+    "Charenton-le-Pont",
+    "Paris 13e",
+  ],
+  makesOffer: [
+    { "@type": "Offer", name: "Séance Ciblée", price: "60", priceCurrency: "EUR" },
+    { "@type": "Offer", name: "Séance Complète", price: "90", priceCurrency: "EUR" },
+  ],
+};
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
       {
-        title:
-          "Soma & Souffle — Thérapie par ventouses à Paris | Cupping Therapy",
+        title: "Ventouses & Gua Sha à Ivry-sur-Seine — séance bien-être",
       },
       {
         name: "description",
         content:
-          "Thérapie par ventouses à Paris : soulagez les tensions, améliorez la circulation et retrouvez l'équilibre. Cupping therapy in Paris.",
+          "Séance de ventouses sèches, Gua Sha et pistolet de massage à Ivry-sur-Seine. 45 min ou 1 h, 60 ou 90 € selon la formule. Réservation en ligne.",
       },
-      {
-        property: "og:title",
-        content: "Soma & Souffle — Thérapie par ventouses | Cupping Therapy",
-      },
+      { property: "og:title", content: "Ventouses & Gua Sha à Ivry-sur-Seine" },
       {
         property: "og:description",
         content:
-          "Soulagez les tensions et retrouvez l'équilibre grâce à la thérapie par ventouses.",
+          "Un temps de détente et de relâchement corporel. 45 min ou 1 h, à partir de 60 €. Réservation en ligne.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "fr_FR" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(jsonLd) },
     ],
   }),
 });
+
+const techniques = [
+  {
+    title: "Les ventouses",
+    text: "Des cloches de verre ou de silicone posées sur la peau, qui créent une aspiration douce. La peau se soulève, les tissus se décollent, la circulation locale se réveille. Elles restent en place quelques minutes, ou glissent le long du dos.",
+  },
+  {
+    title: "Le Gua Sha",
+    text: "Un outil lisse — pierre ou corne — passé sur la peau huilée, avec une pression régulière. Le geste est lent, presque répétitif. Il prolonge le travail des ventouses sur les zones qu'elles atteignent mal : nuque, épaules, avant-bras.",
+  },
+  {
+    title: "Le pistolet de massage",
+    text: "Un Theragun PRO, en finition. Des percussions rapides sur le muscle, jamais sur les os ni les articulations. Quelques minutes suffisent. C'est l'outil de la récupération après l'effort — il n'est utilisé que si la séance s'y prête.",
+  },
+];
+
+const steps = [
+  {
+    title: "On échange quelques minutes",
+    text: "Ce que vous cherchez, comment vous vous sentez, les zones que vous préférez éviter.",
+  },
+  {
+    title: "Questionnaire préalable",
+    text: "Court, rempli ensemble à la première séance. Il sert à écarter les situations où la ventouse est déconseillée.",
+  },
+  {
+    title: "Ventouses, puis Gua Sha",
+    text: "Vous restez habillé·e hors de la zone travaillée. Les ventouses sont posées puis retirées progressivement, et le Gua Sha se pratique sur peau huilée.",
+  },
+  {
+    title: "Quelques minutes pour revenir",
+    text: "On ne se relève pas d'un coup. Puis les conseils : boire de l'eau, couvrir la zone, éviter sauna et piscine pendant 24 h.",
+  },
+];
+
+const faq = [
+  {
+    q: "Est-ce que ça fait mal ?",
+    a: "Non. La sensation est celle d'une traction ferme sur la peau, parfois surprenante les premières secondes. L'intensité de la succion se règle à tout moment : dites-le simplement et j'ajuste. Une séance ne doit jamais être douloureuse.",
+  },
+  {
+    q: "Ces marques, elles partent en combien de temps ?",
+    a: "Entre 3 et 10 jours selon les peaux. Ce sont des cercles rouges à violacés, indolores. C'est l'effet normal de la technique, pas un bleu ni une blessure. Si vous avez un mariage, une séance photo ou la plage dans la semaine, dites-le : on travaille des zones couvertes, ou on décale.",
+  },
+  {
+    q: "Je dois me déshabiller entièrement ?",
+    a: "Non. Seule la zone travaillée est découverte, le reste du corps reste couvert. Venez avec un haut confortable, facile à retirer. Vous gardez vos sous-vêtements.",
+  },
+  {
+    q: "Je prends un traitement — je peux venir ?",
+    a: "Cela dépend du traitement. Les anticoagulants sont une contre-indication ferme. Pour le reste, écrivez-moi avant de réserver : mieux vaut deux minutes d'échange qu'une séance à annuler sur place. Un questionnaire complet est rempli ensemble à la première venue.",
+  },
+  {
+    q: "Je ne sais pas quelle formule choisir",
+    a: "Si vous n'avez jamais fait de ventouses, prenez la Ciblée à 60 € : c'est le bon format pour découvrir la sensation et voir comment votre peau réagit. On passe à la Complète ensuite si ça vous a plu. Et si vous vous êtes trompée, on ajuste sur place.",
+  },
+  {
+    q: "Et si je dois annuler ?",
+    a: "Librement, jusqu'à 24 h avant, depuis le lien reçu par e-mail. Aucun frais, aucune justification à donner. En deçà de 24 h, un simple appel suffit.",
+  },
+  {
+    q: "Je règle comment ?",
+    a: "Sur place, en fin de séance : espèces, carte ou virement. Facture remise systématiquement.",
+  },
+];
+
+const contreIndications = [
+  "vous prenez un traitement anticoagulant, ou avez un trouble de la coagulation ;",
+  "vous avez une plaie, une brûlure ou une infection sur la zone ;",
+  "vous avez des varices, une phlébite ou une thrombose ;",
+  "vous avez de la fièvre ou une infection en cours ;",
+  "vous êtes enceinte ;",
+  "vous avez une grosseur ou une lésion non identifiée sur la zone.",
+];
 
 function Index() {
   return (
@@ -45,378 +140,363 @@ function Index() {
   );
 }
 
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="font-serif text-2xl md:text-3xl mt-16 mb-5 pb-2 border-b border-border">
+      {children}
+    </h2>
+  );
+}
+
 function LandingPage() {
-  const { language, setLanguage, t } = useLanguage();
-
-  const navLinks = [
-    { href: "#approche", label: t("Approche", "Approach") },
-    { href: "#services", label: t("Services", "Services") },
-    { href: "#faq", label: t("FAQ", "FAQ") },
-    { href: "#contact", label: t("Contact", "Contact") },
-  ];
-
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground">
-      {/* Soft ethereal background gradient */}
+    <div className="min-h-screen bg-background font-serif text-foreground pb-24 md:pb-0">
+      {/* Soft ethereal background */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-brand-sage/10 blur-[120px]" />
-        <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] rounded-full bg-brand-clay/8 blur-[100px]" />
+        <div className="absolute top-0 left-1/4 h-[600px] w-[600px] rounded-full bg-brand-sage/10 blur-[120px]" />
+        <div className="absolute bottom-1/4 right-0 h-[500px] w-[500px] rounded-full bg-brand-clay/10 blur-[100px]" />
       </div>
 
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-40 px-6 md:px-8 py-5 bg-background/70 backdrop-blur-md border-b border-border/30">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <Link to="/" className="font-serif text-xl md:text-2xl italic text-foreground">
-            Soma & Souffle
-          </Link>
-
-          <div className="flex items-center gap-6 md:gap-8">
-            <div className="hidden md:flex gap-6 text-[11px] uppercase tracking-[0.2em] font-medium text-muted-foreground">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="hover:text-brand-clay transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-
-            {/* Language toggle */}
-            <div className="flex border border-border rounded-full p-1 bg-card/80">
-              <button
-                type="button"
-                onClick={() => setLanguage("fr")}
-                className={cnToggle(language === "fr")}
-              >
-                FR
-              </button>
-              <button
-                type="button"
-                onClick={() => setLanguage("en")}
-                className={cnToggle(language === "en")}
-              >
-                EN
-              </button>
-            </div>
+      <div className="mx-auto max-w-2xl px-6">
+        {/* Hero */}
+        <header className="pt-14 text-center md:pt-20">
+          <div className="mx-auto mb-8 overflow-hidden rounded-2xl border border-border">
+            <img
+              src={heroImage}
+              alt="Pose de ventouses lors d'une séance de bien-être"
+              className="h-52 w-full object-cover md:h-64"
+              loading="eager"
+            />
           </div>
-        </div>
-      </nav>
+          <p className="mb-5 font-sans text-xs uppercase tracking-[0.18em] text-primary">
+            Ivry-sur-Seine
+          </p>
+          <h1 className="mb-4 font-serif text-4xl leading-tight md:text-5xl">
+            Ventouses &amp; Gua Sha
+          </h1>
+          <p className="mx-auto mb-8 max-w-lg text-lg text-muted-foreground">
+            Un temps pour relâcher ce qui s'est accumulé dans le corps.
+            Ventouses posées à sec, Gua Sha, et pistolet de massage si besoin.
+          </p>
 
-      {/* Hero */}
-      <header className="relative pt-32 md:pt-40 pb-20 md:pb-32 px-6 md:px-8 overflow-hidden">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
-          <div className="lg:col-span-7 space-y-8">
-            <span className="inline-block text-[10px] uppercase tracking-[0.25em] text-brand-clay font-semibold">
-              {t("Vacuothérapie & Bien-être", "Cupping Therapy & Wellness")}
-            </span>
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.92] text-foreground">
-              {t("Relâcher les ", "Release ")}
-              <span className="italic text-brand-clay">
-                {t("tensions", "tension")}
-              </span>
-              {t(" par le vide.", " through suction.")}
-            </h1>
-            <p className="max-w-md text-lg md:text-xl text-muted-foreground leading-relaxed">
-              {t(
-                "L'art thérapeutique des ventouses pour restaurer la circulation, soulager les douleurs chroniques et libérer l'énergie stagnante.",
-                "The therapeutic art of cupping to restore circulation, relieve chronic pain, and release stagnant energy."
-              )}
+          <div className="flex flex-wrap overflow-hidden rounded-2xl border border-border bg-card">
+            {[
+              { b: "45 / 60 min", s: "Selon la formule" },
+              { b: "60 ou 90 €", s: "La séance" },
+              { b: "À sec", s: "Sans incision" },
+            ].map((f, i) => (
+              <div
+                key={f.b}
+                className={`flex-1 basis-32 px-3 py-4 text-center ${
+                  i < 2 ? "border-b border-border sm:border-b-0 sm:border-r" : ""
+                }`}
+              >
+                <b className="block whitespace-nowrap text-lg font-semibold">
+                  {f.b}
+                </b>
+                <span className="mt-1 block font-sans text-[0.7rem] uppercase tracking-[0.1em] text-muted-foreground">
+                  {f.s}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-7">
+            <a
+              href="#reserver"
+              className="inline-block rounded-full bg-primary px-8 py-3.5 font-sans text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Voir les créneaux disponibles
+            </a>
+            <p className="mt-3 font-sans text-xs text-muted-foreground">
+              Réservation en ligne · annulation libre jusqu'à 24 h avant
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <Button
-                asChild
-                className="bg-brand-dark text-brand-cream hover:bg-brand-dark/90 px-8 py-6 text-xs uppercase tracking-[0.2em] font-semibold rounded-full"
-              >
-                <a href="#contact">
-                  {t("Réserver une séance", "Book a session")}
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="border-border text-foreground hover:bg-secondary px-8 py-6 text-xs uppercase tracking-[0.2em] font-semibold rounded-full"
-              >
-                <a href="#services">
-                  {t("Découvrir les soins", "Discover treatments")}
-                </a>
-              </Button>
-            </div>
           </div>
+        </header>
 
-          <div className="lg:col-span-5">
-            <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-muted ring-1 ring-border">
-              <img
-                src={heroImage}
-                alt={t(
-                  "Séance de ventouses dans une ambiance zen et lumineuse",
-                  "Cupping therapy session in a bright zen atmosphere"
-                )}
-                width={1024}
-                height={1280}
-                className="size-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/10 to-transparent" />
-            </div>
-          </div>
+        {/* Disclaimer */}
+        <div className="mt-10 rounded-2xl border border-brand-clay/40 bg-secondary/60 px-6 py-5 text-sm text-muted-foreground">
+          Prestation de bien-être. Je ne suis pas professionnelle de santé : je
+          ne pose aucun diagnostic et ne délivre aucun traitement. Cette séance
+          ne remplace pas une consultation médicale.
         </div>
-      </header>
 
-      {/* Services / Benefits */}
-      <section id="services" className="py-24 md:py-32 px-6 md:px-8 bg-card/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-baseline mb-16 md:mb-20 border-b border-border pb-8 gap-4">
-            <h2 className="font-serif text-3xl md:text-4xl">
-              {t("Nos Pratiques", "Our Practices")}
-            </h2>
-            <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground italic">
-              {t("Bienfaits de la vacuothérapie", "Benefits of cupping therapy")}
+        {/* Techniques */}
+        <section id="techniques">
+          <SectionTitle>Les trois techniques</SectionTitle>
+          <p className="text-muted-foreground">
+            Elles se combinent au fil de la séance, selon ce que votre corps
+            demande ce jour-là.
+          </p>
+          <div className="mt-6 space-y-7">
+            {techniques.map((tech, i) => (
+              <div key={tech.title} className="flex items-start gap-4">
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-accent/20 font-sans text-sm font-semibold text-primary">
+                  {i + 1}
+                </div>
+                <div>
+                  <h3 className="mb-1 font-sans text-base font-semibold">
+                    {tech.title}
+                  </h3>
+                  <p className="m-0 text-[0.97rem] text-muted-foreground">
+                    {tech.text}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Formules */}
+        <section id="formules">
+          <SectionTitle>Les formules</SectionTitle>
+
+          <div className="my-4 rounded-2xl border border-border bg-card p-6">
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <h3 className="font-sans text-base font-semibold">
+                Ciblée · 45 min
+              </h3>
+              <span className="text-2xl font-semibold">60 €</span>
+            </div>
+            <p className="mt-3 text-muted-foreground">
+              Ventouses et Gua Sha, sur le haut ou le bas du corps. Le bon
+              format pour une première fois.
+            </p>
+            <a
+              href="#reserver"
+              className="mt-4 inline-block rounded-full border border-primary px-6 py-2.5 font-sans text-sm font-semibold text-primary"
+            >
+              Réserver cette formule
+            </a>
+          </div>
+
+          <div className="my-4 rounded-2xl border border-primary bg-card p-6">
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <h3 className="font-sans text-base font-semibold">
+                Complète · 1 h
+              </h3>
+              <span className="text-2xl font-semibold">90 €</span>
+            </div>
+            <p className="mt-3 text-muted-foreground">
+              Ventouses et Gua Sha sur le haut et le bas du corps, finition au
+              pistolet de massage.
+            </p>
+            <a
+              href="#reserver"
+              className="mt-4 inline-block rounded-full bg-primary px-6 py-2.5 font-sans text-sm font-semibold text-primary-foreground"
+            >
+              Réserver cette formule
+            </a>
+          </div>
+
+          <div className="my-4 space-y-2 rounded-2xl border border-border bg-card/60 p-6 text-sm text-muted-foreground">
+            <p className="m-0">
+              <strong className="text-foreground">Première séance :</strong> 15
+              minutes offertes pour remplir ensemble le questionnaire préalable.
+            </p>
+            <p className="m-0">
+              <strong className="text-foreground">Forfaits 3 séances :</strong>{" "}
+              Ciblées 165 € (55 € la séance) · Complètes 245 € (≈82 € la
+              séance). Valables 6 mois.
+            </p>
+            <p className="m-0">
+              <strong className="text-foreground">Aucun supplément :</strong>{" "}
+              tout est compris dans la formule.
+            </p>
+          </div>
+        </section>
+
+        {/* Déroulé */}
+        <section id="deroule">
+          <SectionTitle>Comment se passe une séance</SectionTitle>
+          <ol className="m-0 list-none space-y-5 p-0">
+            {steps.map((step, i) => (
+              <li key={step.title} className="relative pl-12">
+                <span className="absolute left-0 top-0 grid h-8 w-8 place-items-center rounded-full bg-accent/20 font-sans text-sm font-bold text-primary">
+                  {i + 1}
+                </span>
+                <b className="block font-sans text-[0.95rem]">{step.title}</b>
+                <span className="text-[0.95rem] text-muted-foreground">
+                  {step.text}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq">
+          <SectionTitle>Les questions qu'on me pose</SectionTitle>
+          <div>
+            {faq.map((item) => (
+              <details key={item.q} className="group border-b border-border">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 font-sans text-[0.97rem] font-semibold">
+                  {item.q}
+                  <span className="text-xl font-normal text-primary transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="pb-4 text-[0.97rem] text-muted-foreground">
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* À savoir */}
+        <section id="a-savoir">
+          <SectionTitle>À savoir avant de réserver</SectionTitle>
+          <div className="rounded-2xl border border-brand-clay/40 bg-secondary/60 px-6 py-5 text-muted-foreground">
+            <p className="m-0">
+              <strong className="text-foreground">
+                Les ventouses laissent des marques.
+              </strong>{" "}
+              Des cercles rouges à violacés, qui persistent habituellement entre
+              3 et 10 jours. C'est l'effet normal de la technique, et c'est sans
+              gravité — mais mieux vaut le savoir avant de réserver. Le Gua Sha
+              laisse le même type de marques.
+            </p>
+          </div>
+
+          <h3 className="mb-2 mt-8 font-sans text-base font-semibold">
+            Séance déconseillée si
+          </h3>
+          <ul className="m-0 list-none p-0">
+            {contreIndications.map((c) => (
+              <li key={c} className="relative pb-2 pl-6 text-muted-foreground">
+                <span className="absolute left-0 text-primary">—</span>
+                {c}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-muted-foreground">
+            Cette liste n'est pas exhaustive, et une réponse « oui » n'interdit
+            pas toujours la séance. Dans le doute, écrivez-moi avant de réserver
+            — on regarde ensemble, ça prend deux minutes.
+          </p>
+        </section>
+
+        {/* Réserver */}
+        <section id="reserver" className="scroll-mt-6">
+          <SectionTitle>Réserver</SectionTitle>
+          <p className="text-muted-foreground">
+            Choisissez votre créneau ci-dessous. Vous recevrez une confirmation
+            par e-mail, et le rendez-vous s'ajoutera directement à votre agenda.
+          </p>
+          <div className="my-5 grid h-72 place-items-center rounded-2xl border border-dashed border-border bg-card px-6 text-center font-sans text-sm text-muted-foreground">
+            <span>
+              Emplacement du calendrier de réservation (Cal.com) — à connecter.
             </span>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
-            <ServiceCard
-              icon={<WindIcon className="size-5" />}
-              title={t("Drainage Lymphatique", "Lymphatic Drainage")}
-              description={t(
-                "Stimule l'élimination des toxines et réduit l'inflammation pour une sensation de légèreté immédiate.",
-                "Stimulates toxin elimination and reduces inflammation for an immediate feeling of lightness."
-              )}
-            />
-            <ServiceCard
-              icon={<LeafIcon className="size-5" />}
-              title={t("Récupération Sportive", "Sports Recovery")}
-              description={t(
-                "Décompresse les tissus myofasciaux pour accélérer la réparation musculaire après l'effort.",
-                "Decompresses myofascial tissue to speed muscle recovery after exertion."
-              )}
-            />
-            <ServiceCard
-              icon={<MessageCircleIcon className="size-5" />}
-              title={t("Équilibre Nerveux", "Nervous Balance")}
-              description={t(
-                "Une approche douce pour calmer le système nerveux et réduire le stress émotionnel ancré.",
-                "A gentle approach to calm the nervous system and reduce anchored emotional stress."
-              )}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Approach */}
-      <section id="approche" className="py-24 md:py-32 px-6 md:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <span className="text-[10px] uppercase tracking-[0.25em] text-brand-clay font-semibold">
-              {t("Notre approche", "Our approach")}
-            </span>
-            <h2 className="font-serif text-3xl md:text-5xl leading-tight">
-              {t(
-                "Une thérapie ancestrale, une écoute moderne.",
-                "An ancestral therapy, a modern listening."
-              )}
-            </h2>
-            <div className="space-y-5 text-muted-foreground leading-relaxed">
-              <p>
-                {t(
-                  "Chaque séance débute par un échange personnalisé pour comprendre votre corps, vos tensions et vos objectifs. Les ventouses sont alors posées avec précision sur les zones concernées.",
-                  "Each session begins with a personalized conversation to understand your body, tensions, and goals. Cups are then placed precisely on the targeted areas."
-                )}
-              </p>
-              <p>
-                {t(
-                  "La sensation est celle d'une aspiration ferme et chaleureuse. Laissez-vous porter pendant 30 à 60 minutes dans un environnement calme, parfumé et pensé pour la détente profonde.",
-                  "The sensation is that of a firm, warm suction. Let yourself be carried away for 30 to 60 minutes in a calm, scented environment designed for deep relaxation."
-                )}
-              </p>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="absolute inset-0 bg-brand-sage/10 rounded-[2rem] blur-2xl" />
-            <div className="relative bg-card rounded-[2rem] p-8 md:p-12 ring-1 ring-border space-y-8">
-              <div className="flex items-start gap-4">
-                <div className="size-10 rounded-full bg-brand-clay/10 flex items-center justify-center text-brand-clay shrink-0">
-                  <span className="font-serif text-lg">1</span>
-                </div>
-                <div>
-                  <h3 className="font-serif text-xl mb-2">
-                    {t("Consultation", "Consultation")}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t(
-                      "On fait le point sur vos besoins et vos zones de tension.",
-                      "We review your needs and tension areas."
-                    )}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="size-10 rounded-full bg-brand-clay/10 flex items-center justify-center text-brand-clay shrink-0">
-                  <span className="font-serif text-lg">2</span>
-                </div>
-                <div>
-                  <h3 className="font-serif text-xl mb-2">
-                    {t("Soin sur mesure", "Tailored treatment")}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t(
-                      "Pose des ventouses adaptées à votre corps et à votre ressenti.",
-                      "Cup placement adapted to your body and sensations."
-                    )}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="size-10 rounded-full bg-brand-clay/10 flex items-center justify-center text-brand-clay shrink-0">
-                  <span className="font-serif text-lg">3</span>
-                </div>
-                <div>
-                  <h3 className="font-serif text-xl mb-2">
-                    {t("Conseils & suivi", "Advice & follow-up")}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t(
-                      "Recommandations personnalisées pour prolonger les bienfaits.",
-                      "Personalized recommendations to extend the benefits."
-                    )}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className="py-24 md:py-32 px-6 md:px-8 bg-card/30">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl text-center mb-16">
-            {t("Questions Fréquentes", "Frequently Asked Questions")}
-          </h2>
-          <div className="divide-y divide-border">
-            <FaqItem
-              question={t("Est-ce que les ventouses font mal ?", "Does cupping hurt?")}
-              answer={t(
-                "Non, la sensation est celle d'une pression inverse ferme mais confortable. Nous ajustons l'intensité à votre ressenti.",
-                "No, the sensation is that of a firm but comfortable reverse pressure. We adjust the intensity to your comfort."
-              )}
-            />
-            <FaqItem
-              question={t("Combien de temps durent les marques ?", "How long do the marks last?")}
-              answer={t(
-                "Les décolorations circulaires disparaissent généralement entre 3 et 7 jours selon votre circulation.",
-                "The circular discolorations usually fade within 3 to 7 days depending on your circulation."
-              )}
-            />
-            <FaqItem
-              question={t("À qui s'adresse cette thérapie ?", "Who is this therapy for?")}
-              answer={t(
-                "Elle convient aux personnes souffrant de tensions musculaires, de stress, de fatigue ou de douleurs chroniques légères.",
-                "It is suitable for people suffering from muscle tension, stress, fatigue, or mild chronic pain."
-              )}
-            />
-            <FaqItem
-              question={t("Quelle est la durée d'une séance ?", "How long is a session?")}
-              answer={t(
-                "Comptez entre 45 et 75 minutes selon le soin choisi, dont un temps d'échange initial.",
-                "Plan for 45 to 75 minutes depending on the chosen treatment, including an initial consultation."
-              )}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Contact / CTA */}
-      <section id="contact" className="py-24 md:py-32 px-6 md:px-8">
-        <div className="max-w-4xl mx-auto text-center space-y-8 bg-card rounded-[2.5rem] p-10 md:p-16 ring-1 ring-border">
-          <h2 className="font-serif text-3xl md:text-5xl">
-            {t("Prenez soin de vous.", "Take care of yourself.")}
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-            {t(
-              "Réservez votre première séance de ventouses à Paris et ressentez la différence dès le premier soin.",
-              "Book your first cupping session in Paris and feel the difference from the very first treatment."
-            )}
+          <p className="font-sans text-sm text-muted-foreground">
+            Un souci d'affichage ou aucun créneau ne vous convient ? Écrivez-moi,
+            j'ouvre régulièrement des disponibilités.
           </p>
-          <Button
-            asChild
-            className="bg-brand-clay text-brand-cream hover:bg-brand-clay/90 px-10 py-6 text-xs uppercase tracking-[0.2em] font-semibold rounded-full"
-          >
-            <a href="mailto:bonjour@soma-souffle.com">
-              {t("Réserver par email", "Book by email")}
-            </a>
-          </Button>
-          <p className="text-sm text-muted-foreground pt-4">
-            {t(
-              "Ou écrivez-nous via le chat en bas à droite.",
-              "Or reach us via the chat at the bottom right."
-            )}
+        </section>
+
+        {/* Avis */}
+        <section id="avis">
+          <SectionTitle>Ce qu'en disent les clientes</SectionTitle>
+          {[1, 2].map((n) => (
+            <blockquote
+              key={n}
+              className="my-4 rounded-r-2xl border border-l-[3px] border-border border-l-primary bg-card px-6 py-4"
+            >
+              <p className="mb-2 italic">
+                « Avis réel, recueilli avec l'accord de la personne. »
+              </p>
+              <cite className="font-sans text-sm not-italic text-muted-foreground">
+                — Prénom, mois année
+              </cite>
+            </blockquote>
+          ))}
+        </section>
+
+        {/* Venir */}
+        <section id="venir">
+          <SectionTitle>Venir</SectionTitle>
+          <p className="font-sans text-sm text-muted-foreground">
+            Adresse · 94200 Ivry-sur-Seine
+            <br />
+            Métro / RER / bus — temps de marche · stationnement · étage
           </p>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-brand-dark text-brand-cream py-16 md:py-20 px-6 md:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-          <div className="font-serif text-2xl italic">Soma & Souffle</div>
-          <div className="flex gap-10 text-[10px] uppercase tracking-[0.2em] font-medium opacity-60">
-            <a href="mailto:bonjour@soma-souffle.com" className="hover:opacity-100 transition-opacity">
-              Email
-            </a>
-            <a href="#" className="hover:opacity-100 transition-opacity">
-              Instagram
+          <p className="text-muted-foreground">
+            Venez avec un haut confortable, facile à retirer sur la zone
+            concernée. Évitez un repas lourd dans l'heure qui précède, et
+            prévoyez de ne pas enchaîner sur une séance de sport dans la foulée.
+          </p>
+          <div className="mt-6 text-center">
+            <a
+              href="#reserver"
+              className="inline-block rounded-full bg-primary px-8 py-3.5 font-sans text-sm font-semibold text-primary-foreground"
+            >
+              Choisir mon créneau
             </a>
           </div>
-          <div className="text-[10px] opacity-40 uppercase">
-            &copy; {new Date().getFullYear()} Soma & Souffle. Paris, FR.
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-}
+        </section>
 
-function cnToggle(active: boolean) {
-  return `
-    px-3 py-1 text-[10px] font-bold rounded-full transition-colors
-    ${active ? "bg-brand-dark text-brand-cream" : "text-muted-foreground hover:text-foreground"}
-  `;
-}
+        {/* Footer */}
+        <footer className="mt-16 border-t border-border pb-16 pt-8 font-sans text-[0.83rem] leading-relaxed text-muted-foreground">
+          <h2 className="mb-2 mt-6 font-sans text-[0.83rem] uppercase tracking-[0.1em] text-foreground">
+            Annulation
+          </h2>
+          <p>
+            Annulation et report libres jusqu'à 24 h avant, depuis le lien reçu
+            par e-mail. En deçà, le créneau ne peut plus être proposé à
+            quelqu'un d'autre : merci de prévenir par téléphone dès que
+            possible.
+          </p>
 
-function ServiceCard({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="group">
-      <div className="w-12 h-px bg-brand-clay mb-6 group-hover:w-full transition-all duration-700" />
-      <div className="size-10 rounded-2xl bg-brand-clay/10 flex items-center justify-center text-brand-clay mb-5">
-        {icon}
+          <h2 className="mb-2 mt-6 font-sans text-[0.83rem] uppercase tracking-[0.1em] text-foreground">
+            Vos données
+          </h2>
+          <p>
+            Les informations recueillies lors de la réservation et du
+            questionnaire préalable servent uniquement à assurer votre sécurité
+            pendant la séance et le suivi de votre dossier. La réservation en
+            ligne passe par Cal.com ; le questionnaire préalable reste sur un
+            poste chiffré, hors de tout service en ligne, et n'est transmis à
+            personne. L'ensemble est supprimé 3 ans après notre dernier contact.
+            Vous pouvez demander à consulter, corriger ou faire supprimer vos
+            données, et retirer votre consentement, en écrivant à l'adresse de
+            contact. Vous pouvez introduire une réclamation auprès de la CNIL.
+          </p>
+
+          <h2 className="mb-2 mt-6 font-sans text-[0.83rem] uppercase tracking-[0.1em] text-foreground">
+            Mentions légales
+          </h2>
+          <p>
+            Prénom Nom, entrepreneure individuelle — Adresse, 94200
+            Ivry-sur-Seine
+            <br />
+            SIRET · téléphone · e-mail
+            <br />
+            TVA non applicable, article 293 B du CGI
+            <br />
+            Hébergeur du site : à compléter
+          </p>
+
+          <p className="mt-6">
+            Prestation de bien-être. Ne constitue ni un acte de soin, ni un
+            diagnostic, ni un traitement médical.
+          </p>
+        </footer>
       </div>
-      <h3 className="font-serif text-xl md:text-2xl mb-4">{title}</h3>
-      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-        {description}
-      </p>
-    </div>
-  );
-}
 
-function FaqItem({ question, answer }: { question: string; answer: string }) {
-  return (
-    <div className="py-6 group">
-      <h4 className="font-medium text-sm md:text-base mb-2 text-foreground">
-        {question}
-      </h4>
-      <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">
-        {answer}
-      </p>
+      {/* Sticky mobile bar */}
+      <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between gap-4 border-t border-border bg-background/95 px-4 py-3 backdrop-blur-md md:hidden">
+        <div className="font-sans text-xs leading-snug text-muted-foreground">
+          <b className="block text-[0.95rem] text-foreground">À partir de 60 €</b>
+          Annulation libre 24 h avant
+        </div>
+        <a
+          href="#reserver"
+          className="whitespace-nowrap rounded-full bg-primary px-6 py-3 font-sans text-sm font-semibold text-primary-foreground"
+        >
+          Réserver
+        </a>
+      </div>
     </div>
   );
 }

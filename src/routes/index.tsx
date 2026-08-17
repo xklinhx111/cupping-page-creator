@@ -1,4 +1,5 @@
 import { ChatWidget } from "@/components/chat-widget";
+import { LanguageProvider } from "@/components/language-provider";
 import heroImage from "@/assets/hero-cupping.jpg";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -132,10 +133,10 @@ const contreIndications = [
 
 function Index() {
   return (
-    <>
+    <LanguageProvider>
       <LandingPage />
       <ChatWidget />
-    </>
+    </LanguageProvider>
   );
 }
 
